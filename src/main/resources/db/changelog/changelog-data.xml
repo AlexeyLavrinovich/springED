@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1" author="Alexey Lavrinovich">
+        <sql>
+            INSERT INTO _user (id, login, password) VALUES (1, 'alexey', '1234');
+            INSERT INTO _user (id, login, password) VALUES (2, 'Yoda', 'jedi');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
