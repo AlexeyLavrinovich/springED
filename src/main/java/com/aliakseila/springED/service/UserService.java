@@ -22,7 +22,7 @@ public class UserService implements UserDetailsService {
     private UserRepo userRepo;
 
     public List<UserDto> getAllUsers() {
-        return userRepo.findAll().stream().map(UserMapper.INSTANCE::mapToModel).collect(Collectors.toList());
+        return userRepo.findAll().stream().map(UserMapper.INSTANCE::mapToDto).collect(Collectors.toList());
     }
 
     public List<UserDto> findById(Long id) throws NotFoundException {
@@ -30,19 +30,23 @@ public class UserService implements UserDetailsService {
         if (user.isEmpty()){
             throw new NotFoundException(String.format("User with id \"%d\" not found", id));
         }
-        return user.stream().map(UserMapper.INSTANCE::mapToModel).collect(Collectors.toList());
+        return user.stream().map(UserMapper.INSTANCE::mapToDto).collect(Collectors.toList());
     }
 
-    public User findByUsername(String username) {
-        User user = userRepo.findByUsername(username);
-        if (user == null){
-            throw new UsernameNotFoundException(username);
+    public List<UserDto> findByUsername(String username) throws NotFoundException {
+        Optional<User> user = userRepo.findByUsername(username);
+        if (user.isEmpty()){
+            throw new NotFoundException(String.format("User with username \"%s\" not found", username));
         }
-        return user;
+        return user.stream().map(UserMapper.INSTANCE::mapToDto).collect(Collectors.toList());
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return findByUsername(username);
+        Optional<User> user = userRepo.findByUsername(username);
+        if (user.isEmpty()){
+            throw new UsernameNotFoundException(username);
+        }
+        return user.get();
     }
 }

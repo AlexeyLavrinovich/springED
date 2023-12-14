@@ -1,11 +1,13 @@
 package com.aliakseila.springED.controller;
 
+import com.aliakseila.springED.entity.User;
 import com.aliakseila.springED.service.UserService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,14 +19,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity getUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @SneakyThrows //ToDo: add global exception handler
+    @SneakyThrows//ToDo: add globalExceptionHandler
+    @GetMapping
+    public ResponseEntity getUserByUsername(@RequestBody User user){
+        return ResponseEntity.ok(userService.findByUsername(user.getUsername()));
+    }
+
+    @SneakyThrows //ToDo: add globalExceptionHandler
     @GetMapping("/{id}")
-    public ResponseEntity getUser(@PathVariable Long id){
+    public ResponseEntity getUserById(@PathVariable Long id){
         return ResponseEntity.ok(userService.findById(id));
     }
 

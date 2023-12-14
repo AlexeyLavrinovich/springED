@@ -13,5 +13,5 @@ public abstract class UserMapper {
 
     public abstract User mapToEntity(UserDto customerModel);
 
-    public abstract UserDto mapToModel(User customer);
+    public abstract UserDto mapToDto(User customer);
 }
