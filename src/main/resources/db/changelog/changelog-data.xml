@@ -5,7 +5,7 @@
 
     <changeSet id="1" author="Alexey Lavrinovich">
         <sql>
-            INSERT INTO _user (id, username, password) VALUES (1, 'alexey', '1234');
+            INSERT INTO _user (id, username, password) VALUES (1, 'Алексей Лавринович', '1234');
             INSERT INTO _user (id, username, password) VALUES (2, 'Yoda', 'jedi');
         </sql>
     </changeSet>
