@@ -7,6 +7,7 @@
     <include relativeToChangelogFile="true" file="changelog-data.xml"/>
     <include relativeToChangelogFile="true" file="changelog-user-data.xml"/>
     <include relativeToChangelogFile="true" file="changelog-username-index-ddl.xml"/>
+    <include relativeToChangelogFile="true" file="changelog-profile-ddl.xml"/>
 
 
 </databaseChangeLog>

@@ -1,6 +1,7 @@
 package com.aliakseila.springED.service;
 
 import com.aliakseila.springED.entity.User;
+import com.aliakseila.springED.exception.AlreadyExistException;
 import com.aliakseila.springED.exception.NotFoundException;
 import com.aliakseila.springED.mapper.UserMapper;
 import com.aliakseila.springED.dto.UserDto;
@@ -49,4 +50,14 @@ public class UserService implements UserDetailsService {
         }
         return user.get();
     }
+
+    public void createUser(User newUser) throws AlreadyExistException {
+        Optional<User> user = userRepo.findByUsername(newUser.getUsername());
+        if (user.isEmpty()){
+            userRepo.save(newUser);
+        } else {
+            throw new AlreadyExistException(String.format("User with username \"%s\" already exists", user.get().getUsername()));
+        }
+    }
+
 }
