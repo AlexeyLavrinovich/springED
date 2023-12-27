@@ -10,12 +10,13 @@
             name varchar(128),
             surname varchar(128),
             age tinyint,
+            user_id bigint,
             primary key (id)
             );
 
             alter table if exists _profile
                     add constraint _profile_fk
-                    foreign key (id) references _user;
+                    foreign key (user_id) references _user;
         </sql>
     </changeSet>
 </databaseChangeLog>
