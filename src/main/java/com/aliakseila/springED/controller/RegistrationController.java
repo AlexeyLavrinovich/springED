@@ -1,9 +1,10 @@
 package com.aliakseila.springED.controller;
 
-import com.aliakseila.springED.mapper.UserMapper;
-import com.aliakseila.springED.model.dto.UserDto;
-import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.event.RegisterUserPublisher;
+import com.aliakseila.springED.mapper.RegistrationMapper;
+import com.aliakseila.springED.model.dto.RegistrationDto;
+import com.aliakseila.springED.model.entity.Profile;
+import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.service.UserService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,11 @@ public class RegistrationController {
 
     @SneakyThrows
     @PostMapping("/new")
-    public ResponseEntity createUser(@RequestBody UserDto user) {
-        User newUser = UserMapper.INSTANCE.mapToEntity(user);
+    public ResponseEntity createUser(@RequestBody RegistrationDto registrationDto) {
+        User newUser = RegistrationMapper.INSTANCE.mapToUser(registrationDto);
+        Profile newProfile = RegistrationMapper.INSTANCE.mapToProfile(registrationDto);
         userService.createUser(newUser);
-        publisher.publishUserCreateEvent(newUser);
+        publisher.publishUserCreateEvent(newUser, newProfile);
         return ResponseEntity.ok("Registration successfully finished!");
     }
 

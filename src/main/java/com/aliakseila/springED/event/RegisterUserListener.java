@@ -1,7 +1,5 @@
 package com.aliakseila.springED.event;
 
-import com.aliakseila.springED.model.entity.Profile;
-import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.service.repository.ProfileRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.EventListener;
@@ -15,8 +13,7 @@ public class RegisterUserListener {
 
     @EventListener
     public void onUserCreateEvent(RegisterUserEvent event) {
-        User user = event.getUser();
-        Profile profile = new Profile(user);
-        profileRepo.save(profile);
+        event.getProfile().setUser(event.getUser());
+        profileRepo.save(event.getProfile());
     }
 }
