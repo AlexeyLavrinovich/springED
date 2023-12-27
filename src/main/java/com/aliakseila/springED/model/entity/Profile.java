@@ -2,7 +2,10 @@ package com.aliakseila.springED.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -20,13 +23,14 @@ import lombok.NoArgsConstructor;
 public class Profile {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String surname;
     private Integer age;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Profile(User user){

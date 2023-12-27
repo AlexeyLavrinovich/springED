@@ -1,5 +1,7 @@
 package com.aliakseila.springED.controller;
 
+import com.aliakseila.springED.mapper.UserMapper;
+import com.aliakseila.springED.model.dto.UserDto;
 import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.service.UserService;
 import lombok.SneakyThrows;
@@ -25,7 +27,7 @@ public class UserController {
 
     @SneakyThrows//ToDo: add globalExceptionHandler
     @GetMapping
-    public ResponseEntity getUserByUsername(@RequestBody User user){
+    public ResponseEntity getUserByUsername(@RequestBody UserDto user){
         return ResponseEntity.ok(userService.findByUsername(user.getUsername()));
     }
 

@@ -32,7 +32,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE, mappedBy = "user", fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private Profile profile;
 

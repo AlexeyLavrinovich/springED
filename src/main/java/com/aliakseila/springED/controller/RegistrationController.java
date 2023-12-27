@@ -1,5 +1,7 @@
 package com.aliakseila.springED.controller;
 
+import com.aliakseila.springED.mapper.UserMapper;
+import com.aliakseila.springED.model.dto.UserDto;
 import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.event.RegisterUserPublisher;
 import com.aliakseila.springED.service.UserService;
@@ -27,10 +29,11 @@ public class RegistrationController {
     }
 
     @SneakyThrows
-    @PostMapping
-    public ResponseEntity createUser(@RequestBody User user) {
-        userService.createUser(user);
-        publisher.publishUserCreateEvent(user);
+    @PostMapping("/new")
+    public ResponseEntity createUser(@RequestBody UserDto user) {
+        User newUser = UserMapper.INSTANCE.mapToEntity(user);
+        userService.createUser(newUser);
+        publisher.publishUserCreateEvent(newUser);
         return ResponseEntity.ok("Registration successfully finished!");
     }
 

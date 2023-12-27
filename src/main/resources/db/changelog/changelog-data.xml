@@ -4,10 +4,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <changeSet id="1" author="Alexey Lavrinovich">
-        <sql>
-            INSERT INTO _user (id, username, password) VALUES (1, 'Алексей Лавринович', '1234');
-            INSERT INTO _user (id, username, password) VALUES (2, 'Yoda', 'jedi');
-        </sql>
+        <loadData tableName="_user" file="db/changelog/users.csv" />
     </changeSet>
 
 </databaseChangeLog>
