@@ -1,7 +1,7 @@
 package com.aliakseila.springED.mapper;
 
-import com.aliakseila.springED.entity.User;
-import com.aliakseila.springED.dto.UserDto;
+import com.aliakseila.springED.model.entity.User;
+import com.aliakseila.springED.model.dto.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

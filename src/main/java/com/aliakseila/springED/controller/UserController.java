@@ -1,6 +1,6 @@
 package com.aliakseila.springED.controller;
 
-import com.aliakseila.springED.entity.User;
+import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.service.UserService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

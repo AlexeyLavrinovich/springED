@@ -1,23 +1,22 @@
 package com.aliakseila.springED.event;
 
-import com.aliakseila.springED.entity.Profile;
-import com.aliakseila.springED.entity.User;
-import com.aliakseila.springED.repository.ProfileRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.aliakseila.springED.model.entity.Profile;
+import com.aliakseila.springED.model.entity.User;
+import com.aliakseila.springED.service.repository.ProfileRepo;
+import lombok.AllArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class RegisterUserListener {
 
-    @Autowired
-    private ProfileRepo profileRepo;
+    private final ProfileRepo profileRepo;
 
     @EventListener
-    public void onUserCreateEvent(RegisterUserEvent event){
+    public void onUserCreateEvent(RegisterUserEvent event) {
         User user = event.getUser();
         Profile profile = new Profile(user);
         profileRepo.save(profile);
     }
-
 }

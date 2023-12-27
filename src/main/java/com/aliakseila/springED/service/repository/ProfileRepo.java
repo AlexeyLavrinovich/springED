@@ -1,6 +1,6 @@
-package com.aliakseila.springED.repository;
+package com.aliakseila.springED.service.repository;
 
-import com.aliakseila.springED.entity.Profile;
+import com.aliakseila.springED.model.entity.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

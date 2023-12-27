@@ -1,11 +1,11 @@
 package com.aliakseila.springED.service;
 
-import com.aliakseila.springED.entity.User;
+import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.exception.AlreadyExistException;
 import com.aliakseila.springED.exception.NotFoundException;
 import com.aliakseila.springED.mapper.UserMapper;
-import com.aliakseila.springED.dto.UserDto;
-import com.aliakseila.springED.repository.UserRepo;
+import com.aliakseila.springED.model.dto.UserDto;
+import com.aliakseila.springED.service.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

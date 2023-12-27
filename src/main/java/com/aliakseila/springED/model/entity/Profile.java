@@ -1,4 +1,4 @@
-package com.aliakseila.springED.entity;
+package com.aliakseila.springED.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

@@ -1,11 +1,9 @@
 package com.aliakseila.springED.event;
 
-import com.aliakseila.springED.entity.User;
+import com.aliakseila.springED.model.entity.User;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.stereotype.Component;
 
-@Component
 @Getter
 public class RegisterUserEvent extends ApplicationEvent {
 

@@ -1,4 +1,4 @@
-package com.aliakseila.springED.dto;
+package com.aliakseila.springED.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
