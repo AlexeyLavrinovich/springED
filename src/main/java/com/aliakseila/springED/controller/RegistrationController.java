@@ -6,8 +6,8 @@ import com.aliakseila.springED.model.dto.RegistrationDto;
 import com.aliakseila.springED.model.entity.Profile;
 import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/registration")
+@AllArgsConstructor
 public class RegistrationController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private RegisterUserPublisher publisher;
+    private final UserService userService;
+    private final RegisterUserPublisher publisher;
 
     @GetMapping
     public ResponseEntity info(){

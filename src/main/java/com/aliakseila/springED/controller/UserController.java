@@ -1,11 +1,9 @@
 package com.aliakseila.springED.controller;
 
-import com.aliakseila.springED.mapper.UserMapper;
 import com.aliakseila.springED.model.dto.UserDto;
-import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
+@AllArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/all")
     public ResponseEntity getUsers(){
