@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,12 +48,13 @@ public class UserService implements UserDetailsService {
     }
 
     public void createUser(User newUser) throws AlreadyExistException {
-        Optional<User> user = userRepo.findByUsername(newUser.getUsername());
-        if (user.isEmpty()){
-            userRepo.save(newUser);
-        } else {
-            throw new AlreadyExistException(String.format("User with username \"%s\" already exists", user.get().getUsername()));
-        }
+        userRepo.findByUsername(newUser.getUsername())
+                .ifPresentOrElse(
+                        user -> {
+                            throw new AlreadyExistException(String.format("User with username \"%s\" already exists", newUser.getUsername()));
+                        },
+                        () -> userRepo.save(newUser));
+
     }
 
 }
