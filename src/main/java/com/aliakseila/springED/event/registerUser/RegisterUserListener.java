@@ -1,4 +1,4 @@
-package com.aliakseila.springED.event;
+package com.aliakseila.springED.event.registerUser;
 
 import com.aliakseila.springED.service.repository.ProfileRepo;
 import lombok.AllArgsConstructor;

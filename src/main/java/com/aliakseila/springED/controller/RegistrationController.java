@@ -1,6 +1,6 @@
 package com.aliakseila.springED.controller;
 
-import com.aliakseila.springED.event.RegisterUserPublisher;
+import com.aliakseila.springED.event.registerUser.RegisterUserPublisher;
 import com.aliakseila.springED.mapper.RegistrationMapper;
 import com.aliakseila.springED.model.dto.RegistrationDto;
 import com.aliakseila.springED.model.entity.Profile;

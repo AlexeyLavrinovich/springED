@@ -1,4 +1,4 @@
-package com.aliakseila.springED.event;
+package com.aliakseila.springED.event.registerUser;
 
 import com.aliakseila.springED.model.entity.Profile;
 import com.aliakseila.springED.model.entity.User;
