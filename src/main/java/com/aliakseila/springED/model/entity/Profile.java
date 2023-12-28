@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -25,19 +24,14 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String surname;
+    private String username;
+    @JoinColumn(name = "first_name")
+    private String firstName;
+    @JoinColumn(name = "last_name")
+    private String lastName;
     private Integer age;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-    public Profile(User user){
-        this.user = user;
-        this.name = "";
-        this.surname = "";
-        this.age = 0;
-    }
-
 }

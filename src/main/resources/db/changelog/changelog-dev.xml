@@ -3,10 +3,10 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <include relativeToChangelogFile="true" file="changelog-ddl.xml"/>
-    <include relativeToChangelogFile="true" file="changelog-data.xml"/>
-    <include relativeToChangelogFile="true" file="changelog-username-index-ddl.xml"/>
-    <include relativeToChangelogFile="true" file="changelog-profile-ddl.xml"/>
+    <include relativeToChangelogFile="true" file="ddl/changelog-user-ddl.xml"/>
+    <include relativeToChangelogFile="true" file="ddl/changelog-username-index-ddl.xml"/>
+    <include relativeToChangelogFile="true" file="ddl/changelog-profile-ddl.xml"/>
+    <include relativeToChangelogFile="true" file="data/changelog-user-data.xml"/>
 
 
 </databaseChangeLog>
