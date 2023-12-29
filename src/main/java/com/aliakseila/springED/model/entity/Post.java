@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.builder.ToStringExclude;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -16,7 +16,15 @@ import java.util.Date;
 @NamedEntityGraph(
         name = "post-graph",
         attributeNodes = {
-                @NamedAttributeNode(value = "author")
+                @NamedAttributeNode(value = "author", subgraph = "profile-subgraph")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "profile-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "user")
+                        }
+                )
         }
 )
 public class Post {
@@ -32,7 +40,7 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id")
-    @ToStringExclude
+    @ToString.Exclude
     private Profile author;
 
 

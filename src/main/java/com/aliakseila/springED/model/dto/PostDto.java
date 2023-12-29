@@ -18,6 +18,6 @@ public class PostDto {
     private String text;
     private Date createdAt;
     private Date modifiedAt;
-    private ProfileDto profileDto;
+    private ProfileDto author;
 
 }

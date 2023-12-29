@@ -5,7 +5,7 @@ import com.aliakseila.springED.model.entity.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = {ProfileMapper.class})
+@Mapper(uses = ProfileMapper.class)
 public abstract class PostMapper {
 
     public static final PostMapper INSTANCE = Mappers.getMapper(PostMapper.class);

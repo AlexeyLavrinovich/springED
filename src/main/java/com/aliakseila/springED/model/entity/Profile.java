@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class Profile {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    @ToString.Exclude
     private List<Post> posts;
 }
