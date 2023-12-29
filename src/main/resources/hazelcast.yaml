@@ -1,5 +1,10 @@
 hazelcast:
   network:
+    rest-api:
+      enabled: true
+      endpoint-groups:
+        HEALTH_CHECK:
+          enabled: true
     join:
       multicast:
         enabled: true
