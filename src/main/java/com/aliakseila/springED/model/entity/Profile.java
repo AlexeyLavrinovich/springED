@@ -1,17 +1,12 @@
 package com.aliakseila.springED.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -19,6 +14,12 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Table(name = "_profile")
+@NamedEntityGraph(
+        name = "profile-with-posts-graph",
+        attributeNodes = {
+                @NamedAttributeNode(value = "posts")
+        }
+)
 public class Profile {
 
     @Id
@@ -34,4 +35,7 @@ public class Profile {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "author")
+    private List<Post> posts;
 }

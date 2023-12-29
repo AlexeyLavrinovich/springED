@@ -1,8 +1,6 @@
 package com.aliakseila.springED.service;
 
 import com.aliakseila.springED.exception.NotFoundException;
-import com.aliakseila.springED.mapper.ProfileMapper;
-import com.aliakseila.springED.model.dto.ProfileDto;
 import com.aliakseila.springED.model.entity.Profile;
 import com.aliakseila.springED.model.entity.User;
 import com.aliakseila.springED.service.repository.ProfileRepo;
@@ -17,10 +15,9 @@ public class ProfileService {
     private final UserRepo userRepo;
     private final ProfileRepo profileRepo;
 
-    public ProfileDto findProfileByUsername(String username) {
+    public Profile findProfileByUsername(String username) {
         return userRepo.findByUsername(username)
                 .map(User::getProfile)
-                .map(ProfileMapper.INSTANCE::mapToDto)
                 .orElseThrow(() -> new NotFoundException(String.format("Profile with username \"%s\" not found", username)));
     }
 
