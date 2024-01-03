@@ -4,17 +4,30 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "_post")
+@AssociationOverrides({
+                @AssociationOverride(
+                        name = "createdBy",
+                        joinColumns = @JoinColumn(name = "profile_id")
+                ),
+                @AssociationOverride(
+                        name = "createdAt",
+                        joinColumns = @JoinColumn(name = "created_at")
+                ),
+                @AssociationOverride(
+                        name = "modifiedAt",
+                        joinColumns = @JoinColumn(name = "modified_at")
+                ),
+})
 @NamedEntityGraph(
         name = "post-graph",
         attributeNodes = {
-                @NamedAttributeNode(value = "author", subgraph = "profile-subgraph")
+                @NamedAttributeNode(value = "createdBy", subgraph = "profile-subgraph")
         },
         subgraphs = {
                 @NamedSubgraph(
@@ -25,21 +38,12 @@ import lombok.ToString;
                 )
         }
 )
-public class Post {
+public class Post extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String text;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "date_info_id")
-    private DateInfo dateInfo;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id")
-    @ToString.Exclude
-    private Profile author;
 
 
 }

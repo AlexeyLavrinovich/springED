@@ -1,6 +1,5 @@
 package com.aliakseila.springED.model.dto;
 
-import jakarta.persistence.JoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +17,6 @@ public class PostDto {
     private String text;
     private Date createdAt;
     private Date modifiedAt;
-    private ProfileDto author;
+    private ProfileDto createdBy;
 
 }

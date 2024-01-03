@@ -37,7 +37,7 @@ public class Profile {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "createdBy")
     @ToString.Exclude
     private List<Post> posts;
 }
