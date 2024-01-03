@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,10 +31,10 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String text;
-    @JoinColumn(name = "created_at")
-    private Date createdAt;
-    @JoinColumn(name = "modified_at")
-    private Date modifiedAt;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "date_info_id")
+    private DateInfo dateInfo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id")
