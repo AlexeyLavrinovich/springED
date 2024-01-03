@@ -14,11 +14,9 @@ public class AuditorAwareImpl implements AuditorAware<Profile> {
 
     @Override
     public Optional<Profile> getCurrentAuditor() {
-        return userRepo.findByUsername(
-                        ((User) SecurityContextHolder
+        return Optional.of(((User) SecurityContextHolder
                                 .getContext()
                                 .getAuthentication()
-                                .getPrincipal()).getUsername())
-                .map(User::getProfile);
+                                .getPrincipal()).getProfile());
     }
 }

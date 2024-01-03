@@ -16,9 +16,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Data
 public abstract class Auditable {
-    @CreatedBy
-    @OneToOne(fetch = FetchType.LAZY)
-    protected Profile createdBy;
+
     @CreatedDate
     protected LocalDateTime createdAt;
     @LastModifiedDate

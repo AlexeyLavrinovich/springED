@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
 
 @Entity
 @AllArgsConstructor
@@ -11,10 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "_post")
 @AssociationOverrides({
-                @AssociationOverride(
-                        name = "createdBy",
-                        joinColumns = @JoinColumn(name = "profile_id")
-                ),
                 @AssociationOverride(
                         name = "createdAt",
                         joinColumns = @JoinColumn(name = "created_at")
@@ -45,5 +42,9 @@ public class Post extends Auditable {
     private Long id;
     private String text;
 
+    @CreatedBy
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
+    private Profile createdBy;
 
 }
