@@ -18,6 +18,7 @@ import java.util.List;
 @NamedEntityGraph(
         name = "profile-with-posts-graph",
         attributeNodes = {
+                @NamedAttributeNode(value = "user"),
                 @NamedAttributeNode(value = "posts")
         }
 )
@@ -37,7 +38,7 @@ public class Profile {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "createdBy")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
     @ToString.Exclude
     private List<Post> posts;
 }

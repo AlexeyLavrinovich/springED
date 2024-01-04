@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
 
 @Entity
@@ -43,8 +44,9 @@ public class Post extends Auditable {
     private String text;
 
     @CreatedBy
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id")
+    @ToString.Exclude
     private Profile createdBy;
 
 }
