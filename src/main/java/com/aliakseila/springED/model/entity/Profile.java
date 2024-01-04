@@ -34,11 +34,15 @@ public class Profile {
     private String lastName;
     private Integer age;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "createdBy")
     @ToString.Exclude
     private List<Post> posts;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.friendId")
+    @ToString.Exclude
+    private List<Friend> friends;
 }

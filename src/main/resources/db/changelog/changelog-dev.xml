@@ -8,4 +8,5 @@
     <include relativeToChangelogFile="true" file="ddl/changelog-profile-ddl.xml"/>
     <include relativeToChangelogFile="true" file="data/changelog-user-data.xml"/>
     <include relativeToChangelogFile="true" file="ddl/changelog-post-ddl.xml"/>
+    <include relativeToChangelogFile="true" file="ddl/changelog-friend-ddl.xml"/>
 </databaseChangeLog>
