@@ -14,12 +14,10 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class EmbeddedFriendId {
 
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id")
-    private Profile profileId;
+    private Long profileId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "friend_id")
-    private Profile friendId;
+    private Long friendId;
 
 }

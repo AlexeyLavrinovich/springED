@@ -42,10 +42,10 @@ public class ProfileService {
                 .map(User::getProfile)
                 .filter(u -> !u.equals(profile))
                 .orElseThrow(() -> new NotFoundException(String.format("Profile with username \"%s\" not found", friendUsername)));
-        Friend friend = new Friend(new EmbeddedFriendId(profile, friendProfile));
+        Friend friend = new Friend(new EmbeddedFriendId(profile.getId(), friendProfile.getId()), profile, friendProfile);
         friendRepo.save(friend);
         saveNewFriendToProfile(profile,friend);
-        friend = new Friend(new EmbeddedFriendId(friendProfile, profile));
+        friend = new Friend(new EmbeddedFriendId(friendProfile.getId(), profile.getId()), friendProfile, profile);
         friendRepo.save(friend);
         saveNewFriendToProfile(friendProfile, friend);
     }
@@ -61,7 +61,7 @@ public class ProfileService {
         return profileRepo.findById(profile.getId())
                 .map(p -> p.getFriends()
                         .stream()
-                        .map(f -> f.getId().getProfileId())
+                        .map(Friend::getOwner)
                         .map(ProfileMapper.INSTANCE::mapToDto)
                         .collect(Collectors.toList()))
                 .orElseThrow(() -> new NotFoundException(String.format("Profile with username \"%s\" has no friends", profile.getUsername())));
