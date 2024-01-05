@@ -3,17 +3,14 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="3" author="Alexey Lavrinovich">
-        <sql>
-            create table _friend (
-            owner_id bigint,
-            friend_id bigint,
-            primary key (owner_id, friend_id)
-            );
-
-            alter table if exists _friend
-                    add constraint _friend_id_fk
-                    foreign key (friend_id) references _profile;
-        </sql>
+    <changeSet id="5" author="Alexey Lavrinovich">
+        <createTable tableName="_friend">
+            <column name="owner_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="friend_id" type="bigint">
+                <constraints primaryKey="true" foreignKeyName="_friend_id_fk" references="_profile" nullable="false"/>
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>
