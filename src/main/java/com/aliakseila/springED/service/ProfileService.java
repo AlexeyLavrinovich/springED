@@ -37,31 +37,33 @@ public class ProfileService {
                 .orElseThrow(() -> new NotFoundException(String.format("Profile with id \"%d\" not found", id)));
     }
 
-    public void addFriend(Profile profile, String friendUsername) {
+    public void addFriend(Profile ownerProfile, String friendUsername) {
         Profile friendProfile = userRepo.findByUsername(friendUsername)
                 .map(User::getProfile)
-                .filter(u -> !u.equals(profile))
+                .filter(u -> !u.equals(ownerProfile))
                 .orElseThrow(() -> new NotFoundException(String.format("Profile with username \"%s\" not found", friendUsername)));
-        Friend friend = new Friend(new EmbeddedFriendId(profile.getId(), friendProfile.getId()), profile, friendProfile);
-        friendRepo.save(friend);
-        saveNewFriendToProfile(profile,friend);
-        friend = new Friend(new EmbeddedFriendId(friendProfile.getId(), profile.getId()), friendProfile, profile);
-        friendRepo.save(friend);
-        saveNewFriendToProfile(friendProfile, friend);
+        saveNewFriendToProfile(ownerProfile,friendProfile);
+        saveNewFriendToProfile(friendProfile, ownerProfile);
     }
 
-    private void saveNewFriendToProfile(Profile profile, Friend friend){
-        List<Friend> friends = profile.getFriends();
+    private Friend saveFriend(Profile ownerProfile, Profile friendProfile){
+        Friend friend = new Friend(new EmbeddedFriendId(ownerProfile.getId(), friendProfile.getId()), ownerProfile, friendProfile);
+        return friendRepo.save(friend);
+    }
+
+    private void saveNewFriendToProfile(Profile ownerProfile, Profile friendProfile){
+        Friend friend = saveFriend(ownerProfile, friendProfile);
+        List<Friend> friends = ownerProfile.getFriends();
         friends.add(friend);
-        profile.setFriends(friends);
-        profileRepo.save(profile);
+        ownerProfile.setFriends(friends);
+        profileRepo.save(ownerProfile);
     }
 
     public List<ProfileDto> getFriends(Profile profile) {
         return profileRepo.findById(profile.getId())
                 .map(p -> p.getFriends()
                         .stream()
-                        .map(Friend::getOwner)
+                        .map(Friend::getFriend)
                         .map(ProfileMapper.INSTANCE::mapToDto)
                         .collect(Collectors.toList()))
                 .orElseThrow(() -> new NotFoundException(String.format("Profile with username \"%s\" has no friends", profile.getUsername())));

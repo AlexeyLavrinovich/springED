@@ -42,7 +42,7 @@ public class Profile {
     @ToString.Exclude
     private List<Post> posts;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.friendId")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     @ToString.Exclude
     private List<Friend> friends;
 }

@@ -6,9 +6,9 @@
     <changeSet id="3" author="Alexey Lavrinovich">
         <sql>
             create table _friend (
-            profile_id bigint,
+            owner_id bigint,
             friend_id bigint,
-            primary key (profile_id, friend_id)
+            primary key (owner_id, friend_id)
             );
 
             alter table if exists _friend
