@@ -47,7 +47,7 @@ public class ProfilePageController {
 
     @GetMapping("/friends")
     public ResponseEntity getFriends(@AuthenticationPrincipal User user){
-        return ResponseEntity.ok(profileService.getFriends(user.getProfile()));
+        return ResponseEntity.ok(profileService.getFriends(user));
     }
 
     @PostMapping("/friends")

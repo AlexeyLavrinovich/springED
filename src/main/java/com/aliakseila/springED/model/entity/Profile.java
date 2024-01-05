@@ -28,7 +28,6 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
     @JoinColumn(name = "first_name")
     private String firstName;
     @JoinColumn(name = "last_name")

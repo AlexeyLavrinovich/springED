@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,14 +60,14 @@ public class ProfileService {
         profileRepo.save(ownerProfile);
     }
 
-    public List<ProfileDto> getFriends(Profile profile) {
-        return profileRepo.findById(profile.getId())
+    public List<ProfileDto> getFriends(User user) {
+        return Optional.of(user.getProfile())
                 .map(p -> p.getFriends()
                         .stream()
                         .map(Friend::getFriend)
                         .map(ProfileMapper.INSTANCE::mapToDto)
                         .collect(Collectors.toList()))
-                .orElseThrow(() -> new NotFoundException(String.format("Profile with username \"%s\" has no friends", profile.getUsername())));
+                .orElseThrow(() -> new NotFoundException(String.format("Profile with username \"%s\" has no friends", user.getUsername())));
     }
 
     public ProfileWithPostsDto getProfileWithPosts(Profile authProfile, String username) {

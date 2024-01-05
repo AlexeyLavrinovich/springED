@@ -14,7 +14,6 @@ import java.io.Serializable;
 public class ProfileDto implements Serializable {
 
     private Long id;
-    private String username;
     private String firstName;
     private String lastName;
     private Integer age;
