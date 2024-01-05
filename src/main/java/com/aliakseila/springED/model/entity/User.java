@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,6 +43,7 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.MERGE, mappedBy = "user", fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Profile profile;
 
     @Override

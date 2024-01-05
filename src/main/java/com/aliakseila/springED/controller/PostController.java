@@ -30,4 +30,9 @@ public class PostController {
         return ResponseEntity.ok("Post successfully add!");
     }
 
+    @GetMapping("/feed")
+    public ResponseEntity feed(@AuthenticationPrincipal User user){
+        return ResponseEntity.ok(postService.getFriendsPosts(user.getProfile()));
+    }
+
 }

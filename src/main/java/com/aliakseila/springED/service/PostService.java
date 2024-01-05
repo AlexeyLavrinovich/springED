@@ -3,12 +3,14 @@ package com.aliakseila.springED.service;
 import com.aliakseila.springED.event.createPost.CreatePostPublisher;
 import com.aliakseila.springED.mapper.PostMapper;
 import com.aliakseila.springED.model.dto.PostDto;
+import com.aliakseila.springED.model.entity.Friend;
 import com.aliakseila.springED.model.entity.Post;
 import com.aliakseila.springED.model.entity.Profile;
 import com.aliakseila.springED.service.repository.PostRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,5 +27,15 @@ public class PostService {
 
     public List<PostDto> getAll() {
         return postRepo.findAll().stream().map(PostMapper.INSTANCE::mapToDto).collect(Collectors.toList());
+    }
+
+    public List<PostDto> getFriendsPosts(Profile profile) {
+        return profile.getFriends()
+                .stream()
+                .map(Friend::getFriend)
+                .map(Profile::getPosts)
+                .flatMap(Collection::stream)
+                .map(PostMapper.INSTANCE::mapToDto)
+                .collect(Collectors.toList());
     }
 }
