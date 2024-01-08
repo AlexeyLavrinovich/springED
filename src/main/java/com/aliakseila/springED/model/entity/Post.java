@@ -31,7 +31,8 @@ import org.springframework.data.annotation.CreatedBy;
                 @NamedSubgraph(
                         name = "profile-subgraph",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "user")
+                                @NamedAttributeNode(value = "user"),
+                                @NamedAttributeNode(value = "friends")
                         }
                 )
         }

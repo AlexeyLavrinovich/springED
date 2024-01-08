@@ -20,7 +20,25 @@ import java.util.List;
         name = "profile-with-posts-graph",
         attributeNodes = {
                 @NamedAttributeNode(value = "user"),
-                @NamedAttributeNode(value = "posts")
+                @NamedAttributeNode(value = "posts"),
+                @NamedAttributeNode(value = "friends", subgraph = "friend-subgraph")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "friend-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "owner"),
+                                @NamedAttributeNode(value = "friend", subgraph = "friend-profile-subgraph")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "friend-profile-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "user"),
+                                @NamedAttributeNode(value = "posts"),
+                                @NamedAttributeNode(value = "friends")
+                        }
+                )
         }
 )
 public class Profile {
@@ -34,16 +52,18 @@ public class Profile {
     private String lastName;
     private Integer age;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @ToString.Exclude
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "createdBy")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @OrderColumn(name = "id")
     private List<Post> posts;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Friend> friends;

@@ -27,7 +27,23 @@ import java.util.Collection;
                 @NamedSubgraph(
                         name = "profile-post-subgraph",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "posts")
+                                @NamedAttributeNode(value = "posts"),
+                                @NamedAttributeNode(value = "friends", subgraph = "friends-subgraph")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "friends-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "owner"),
+                                @NamedAttributeNode(value = "friend", subgraph = "friend-profile-subgraph")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "friend-profile-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "user"),
+                                @NamedAttributeNode(value = "posts"),
+                                @NamedAttributeNode(value = "friends")
                         }
                 )
         }
