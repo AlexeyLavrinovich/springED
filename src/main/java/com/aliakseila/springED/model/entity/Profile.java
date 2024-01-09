@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -60,11 +61,10 @@ public class Profile {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OrderColumn(name = "id")
-    private List<Post> posts;
+    private Set<Post> posts;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Friend> friends;
+    private Set<Friend> friends;
 }

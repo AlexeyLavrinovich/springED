@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,7 +55,7 @@ public class ProfileService {
 
     private void saveNewFriendToProfile(Profile ownerProfile, Profile friendProfile) {
         Friend friend = saveFriend(ownerProfile, friendProfile);
-        List<Friend> friends = ownerProfile.getFriends();
+        Set<Friend> friends = ownerProfile.getFriends();
         friends.add(friend);
         ownerProfile.setFriends(friends);
         profileRepo.save(ownerProfile);
